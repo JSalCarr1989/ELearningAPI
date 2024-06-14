@@ -15,5 +15,8 @@ namespace ELearningAPI.Application.Contracts
 
         Task DeleteLesson(int id);
 
+        Task<List<LessonViewModel>> GetAvailableLessonsForACourse(int courseId);
+
+
     }
 }

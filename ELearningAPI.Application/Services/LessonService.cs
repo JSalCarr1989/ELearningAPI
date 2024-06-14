@@ -3,16 +3,21 @@ using ELearningAPI.Infrastructure.Contracts;
 using ELearningAPI.Models.Domain.Entities;
 using ELearningAPI.Models.DTOs;
 using ELearningAPI.Models.ViewModels;
+using System.Text.Json;
 
 namespace ELearningAPI.Application.Services
 {
     public class LessonService : ILessonService
     {
         private readonly ILessonRepository lessonRepository;
+        private readonly IAnswerRepository answerRepository;
+        private readonly IUserContextService userContextService;
 
-        public LessonService(ILessonRepository lessonRepository)
+        public LessonService(ILessonRepository lessonRepository, IAnswerRepository answerRepository, IUserContextService userContextService)
         {
             this.lessonRepository = lessonRepository;
+            this.answerRepository = answerRepository;
+            this.userContextService = userContextService;
         }
         public async Task<int> CreateLesson(CreateLessonDto lessonDto)
         {
@@ -58,6 +63,82 @@ namespace ELearningAPI.Application.Services
             }
 
             lessonRepository.Delete(course.Id);
+        }
+
+        public async Task<List<LessonViewModel>> GetAvailableLessonsForACourse(int courseId)
+        {
+            List<LessonViewModel> availableLessons = new List<LessonViewModel>();
+
+            var userId = userContextService.GetUserId();
+
+            // traer todas las lecciones de un curso que no tengan una correlacion
+            var lessons = await lessonRepository.GetLessonsByCourseId(courseId);
+
+            var studentAnswers = await answerRepository.GetAnswersByStudentId(userId);
+
+            foreach (var lesson in lessons) {
+
+                if (!lesson.CorrelatedLessons.Any())
+                {
+                    var vwLesson = MapLessonToViewModel(lesson);
+                    availableLessons.Add(vwLesson);
+
+                }
+                else
+                {
+
+
+
+                    //foreach(var relatedLesson in lesson.CorrelatedLessons)
+                    //{
+
+                        var approvalCriteria = lesson.ApprovalThreshold;
+                        int scoreSummary = 0;
+                        int incorrectQuestions = 0;
+
+                        foreach (var question in lesson.CorrelatedLessons.FirstOrDefault().RelatedLesson.Questions)
+                        {
+                            // correct id options for the question
+                            var qCorrectAnswerIds = question.Options.Where(o => o.IsCorrect).Select(oid => oid.Id).ToList();
+
+                            // we get the question that the student had answered
+                            var saQuestion = studentAnswers.Where(sa => sa.QuestionId == question.Id).FirstOrDefault();
+
+                            if (saQuestion == null)
+                            {
+                                continue;
+                            }
+
+                            var sRightAnswers = JsonSerializer.Deserialize<List<int>>(saQuestion.SelectedOptions);
+
+                            // if user answers are equal to question correct answers we sum the score to the score summary the question is right
+                            if (qCorrectAnswerIds.Count == sRightAnswers?.Count)
+                            {
+                                scoreSummary = scoreSummary + question.Score;
+                            }
+                            else
+                            {
+                                incorrectQuestions = incorrectQuestions++;
+                            }
+                        }
+
+                        if (scoreSummary >= approvalCriteria)
+                        {
+                            var vwLesson = MapLessonToViewModel(lesson);
+                            availableLessons.Add(vwLesson);
+                        }
+
+                    //}
+
+                  
+
+                }
+
+
+            }
+
+            return availableLessons;
+
         }
 
         public async Task<LessonViewModel> GetLessonById(int id)

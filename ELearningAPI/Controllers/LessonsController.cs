@@ -24,6 +24,15 @@ namespace ELearningAPI.Presentation.Controllers
             return Ok(courses);
         }
 
+        [HttpGet("Available/{id}")]
+        public async Task<IActionResult> GetAvailableLessonsForACourse(int id)
+        {
+            var courses = await lessonService.GetAvailableLessonsForACourse(id);
+
+            return Ok(courses);
+
+        }
+
 
         [HttpGet("{id}")]
         [Authorize(Policy = "RequireProfessorRole")]

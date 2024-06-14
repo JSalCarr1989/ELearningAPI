@@ -7,5 +7,9 @@ namespace ELearningAPI.Infrastructure.Contracts
         Task<Lesson> GetLessonById(int id);
 
         Task<Lesson> GetLastLessonOnCourse(int courseId);
+
+
+        Task<List<Lesson>> GetLessonsByCourseId(int courseId);
+
     }
 }

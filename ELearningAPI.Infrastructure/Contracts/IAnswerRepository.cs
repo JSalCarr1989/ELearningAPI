@@ -7,5 +7,8 @@ namespace ELearningAPI.Infrastructure.Contracts
         Task<StudentAnswer> GetAnswerByUserAndQuestion(int userId, int questionId);
 
         Task<StudentAnswer> GetStudentAnswerById(int id);
+
+        Task<List<StudentAnswer>> GetAnswersByStudentId(int userId);
+ 
     }
 }

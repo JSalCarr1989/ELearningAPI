@@ -24,14 +24,17 @@ namespace ELearningAPI.Presentation.Controllers
             return Ok(courses);
         }
 
-        [HttpGet("Available")]
-        public IActionResult GetAvailableCourses()
+        [HttpGet("Available/{id}")]
+        public async Task<IActionResult> GetAvailableCourses(int id)
         {
-            var courses = courseService.GetAvailableCourses();
+            var courses = await courseService.GetAvailableCourses(id);
 
             return Ok(courses);
 
         }
+
+
+
 
 
         [HttpGet("{id}")]

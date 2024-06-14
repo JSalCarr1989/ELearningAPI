@@ -24,6 +24,14 @@ namespace ELearningAPI.Infrastructure.Repositories
             return answer;
         }
 
+        public async Task<List<StudentAnswer>> GetAnswersByStudentId(int userId)
+        {
+
+            var answers = await context.StudentAnswers.Where(sa => sa.UserId == userId).ToListAsync();
+
+            return answers;
+        }
+
         public async Task<StudentAnswer> GetStudentAnswerById(int id)
         {
 

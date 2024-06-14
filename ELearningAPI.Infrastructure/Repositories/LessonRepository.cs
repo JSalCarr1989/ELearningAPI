@@ -36,5 +36,19 @@ namespace ELearningAPI.Infrastructure.Repositories
             return lesson;
 
         }
+
+        public async Task<List<Lesson>> GetLessonsByCourseId(int courseId)
+        {
+
+            var lessons = await context.Lessons
+                                 .Include(cl => cl.CorrelatedLessons)
+                                 .Include(q => q.Questions)
+                                    .ThenInclude(o => o.Options)
+                                    .Where(l => l.CourseId == courseId)
+                                    .ToListAsync();
+
+            return lessons;
+
+        }
     }
 }
