@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ELearningAPI.Models.DTOs
+﻿namespace ELearningAPI.Models.DTOs
 {
     public class CreateQuestionOptionsDto
     {

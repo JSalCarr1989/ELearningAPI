@@ -14,7 +14,7 @@ namespace ELearningAPI.Infrastructure.Repositories
             this.context = context;
         }
 
-        public async Task<Lesson> GetLastLessonOnCourse(Guid courseId)
+        public async Task<Lesson> GetLastLessonOnCourse(int courseId)
         {
             var lastLesson = await context.Lessons
     .Where(l => l.CourseId == courseId)
@@ -24,7 +24,7 @@ namespace ELearningAPI.Infrastructure.Repositories
             return lastLesson;
         }
 
-        public async  Task<Lesson> GetLessonById(Guid id)
+        public async  Task<Lesson> GetLessonById(int id)
         {
 
             var lesson = await context.Lessons

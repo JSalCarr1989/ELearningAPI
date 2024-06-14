@@ -5,13 +5,13 @@ namespace ELearningAPI.Models.Domain.Entities
     public class StudentAnswer
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
         public User User { get; set; }
 
-        public Guid QuestionId { get; set; }
+        public int QuestionId { get; set; }
 
         public Question Question { get; set; }
 

@@ -4,8 +4,8 @@ namespace ELearningAPI.Infrastructure.Contracts
 {
     public interface ILessonRepository : IGenericRepository<Lesson>
     {
-        Task<Lesson> GetLessonById(Guid id);
+        Task<Lesson> GetLessonById(int id);
 
-        Task<Lesson> GetLastLessonOnCourse(Guid courseId);
+        Task<Lesson> GetLastLessonOnCourse(int courseId);
     }
 }

@@ -19,7 +19,7 @@ namespace ELearningAPI.Application.Services
             this.userContextService = userContextService;
         }
 
-        public async Task<Guid> CreateCourse(CreateCourseDto courseDto)
+        public async Task<int> CreateCourse(CreateCourseDto courseDto)
         {
             // aqui entra el automapper}
 
@@ -50,7 +50,7 @@ namespace ELearningAPI.Application.Services
             return courseId;
         }
 
-        public async Task DeleteCourse(Guid id)
+        public async Task DeleteCourse(int id)
         {
             var course = await courseRepository.GetById(id);
 
@@ -65,7 +65,33 @@ namespace ELearningAPI.Application.Services
 
         }
 
-        public async Task<CourseViewModel> GetCourseById(Guid id)
+        public List<CourseViewModel> GetAvailableCourses()
+        {
+            List<CourseViewModel> courseViewModels = new List<CourseViewModel>();
+
+
+
+
+            
+            // get user id to check user activity and validate completed courses , next courses , etc
+            //var userId = userContextService.GetUserId();
+
+            //var courses = courseRepository.GetAll();
+
+            //var coursesWithoutCorrelation = courses.Where(c => c.CorrelatedCourses.IsNullOrEmpty());
+
+            //foreach (var course in coursesWithoutCorrelation)
+            //{
+            //    var viewCourse = MapCourseToViewModel(course);
+
+            //    courseViewModels.Add(viewCourse);
+            //}
+
+
+            return courseViewModels;
+        }
+
+        public async Task<CourseViewModel> GetCourseById(int id)
         {
             var courseFromDb = await courseRepository.GetCourseById(id);
 
@@ -92,7 +118,7 @@ namespace ELearningAPI.Application.Services
             return courseViewModels;
         }
 
-        public async Task UpdateCourse(Guid id, UpdateCourseDto updateDto)
+        public async Task UpdateCourse(int id, UpdateCourseDto updateDto)
         {
             var course = await courseRepository.GetById(id);
 

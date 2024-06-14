@@ -12,7 +12,7 @@ namespace ELearningAPI.Infrastructure.Repositories
           this.context = context;
         }
 
-        public async Task<Course> GetCourseById(Guid id)
+        public async Task<Course> GetCourseById(int id)
         {
             Course course = null;
 
@@ -41,7 +41,7 @@ namespace ELearningAPI.Infrastructure.Repositories
             return course;
         }
 
-        public async Task<Course> GetLastCourse(Guid userId)
+        public async Task<Course> GetLastCourse(int userId)
         {
 
             var lastcourse = await context.Courses

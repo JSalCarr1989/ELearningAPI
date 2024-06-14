@@ -4,8 +4,8 @@ namespace ELearningAPI.Infrastructure.Contracts
 {
     public interface IAnswerRepository : IGenericRepository<StudentAnswer>
     {
-        Task<StudentAnswer> GetAnswerByUserAndQuestion(Guid userId, Guid questionId);
+        Task<StudentAnswer> GetAnswerByUserAndQuestion(int userId, int questionId);
 
-        Task<StudentAnswer> GetStudentAnswerById(Guid id);
+        Task<StudentAnswer> GetStudentAnswerById(int id);
     }
 }

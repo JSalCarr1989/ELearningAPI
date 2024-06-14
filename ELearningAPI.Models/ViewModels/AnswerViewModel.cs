@@ -2,13 +2,13 @@
 {
     public class StudentAnswerViewModel
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
-        public Guid QuestionId { get; set; }
+        public int QuestionId { get; set; }
 
-        public List<Guid> SelectedOptions { get; set; }
+        public List<int> SelectedOptions { get; set; }
 
         public DateTime CreatedAt { get; set; }
     }

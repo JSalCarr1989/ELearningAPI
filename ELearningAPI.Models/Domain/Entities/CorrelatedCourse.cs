@@ -2,10 +2,10 @@
 {
     public class CorrelatedCourse
     {
-        public Guid CourseId { get; set; }
+        public int CourseId { get; set; }
         public Course Course { get; set; }
 
-        public Guid CorrelatedCourseId { get; set; }
+        public int CorrelatedCourseId { get; set; }
         public Course RelatedCourse { get; set; }
 
     }

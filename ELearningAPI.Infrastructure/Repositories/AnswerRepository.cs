@@ -13,7 +13,7 @@ namespace ELearningAPI.Infrastructure.Repositories
             this.context = context;
         }
 
-        public async Task<StudentAnswer> GetAnswerByUserAndQuestion(Guid userId, Guid questionId)
+        public async Task<StudentAnswer> GetAnswerByUserAndQuestion(int userId, int questionId)
         {
 
             var answer = await context.StudentAnswers
@@ -24,7 +24,7 @@ namespace ELearningAPI.Infrastructure.Repositories
             return answer;
         }
 
-        public async Task<StudentAnswer> GetStudentAnswerById(Guid id)
+        public async Task<StudentAnswer> GetStudentAnswerById(int id)
         {
 
             var lesson = await context.StudentAnswers

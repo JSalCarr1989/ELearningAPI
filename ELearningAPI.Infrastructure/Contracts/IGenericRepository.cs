@@ -2,11 +2,11 @@
 {
     public interface IGenericRepository<T> where T : class
     {
-        Guid Add(T entity);
+        int Add(T entity);
         IEnumerable<T> GetAll();
-        Task<T> GetById(Guid id);
+        Task<T> GetById(int id);
         void Update(T entity);
-        void Delete(Guid id);
+        void Delete(int id);
 
         void SaveChanges();
     }

@@ -14,9 +14,9 @@ namespace ELearningAPI.Infrastructure.Repositories
             dbSet = context.Set<T>();
         }
 
-        public Guid Add(T entity)
+        public int Add(T entity)
         {
-            Guid idValue = Guid.Empty;
+            int idValue = 0;
             try
             {
 
@@ -25,7 +25,7 @@ namespace ELearningAPI.Infrastructure.Repositories
 
                 var idProperty = entity.GetType().GetProperty("Id");
 
-                idValue = (Guid)idProperty.GetValue(entity);
+                idValue = (int)idProperty.GetValue(entity);
 
             }
             catch(Exception ex)
@@ -36,7 +36,7 @@ namespace ELearningAPI.Infrastructure.Repositories
             return idValue;
         }
 
-        public async void Delete(Guid id)
+        public async void Delete(int id)
         {
 
             var entity = await GetById(id);
@@ -55,7 +55,7 @@ namespace ELearningAPI.Infrastructure.Repositories
             return dbSet.ToList();
         }
 
-        public async Task<T> GetById(Guid id)
+        public async Task<T> GetById(int id)
         {
             return await dbSet.FindAsync(id);
         }

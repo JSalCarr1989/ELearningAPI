@@ -5,15 +5,15 @@ namespace ELearningAPI.Application.Contracts
 {
     public interface ILessonService
     {
-        Task<Guid> CreateLesson(CreateLessonDto lessonDto);
+        Task<int> CreateLesson(CreateLessonDto lessonDto);
 
-        Task<LessonViewModel> GetLessonById(Guid id);
+        Task<LessonViewModel> GetLessonById(int id);
 
         List<LessonViewModel> GetLessonList();
 
-        Task UpdateLesson(Guid id, UpdateLessonDto updateDto);
+        Task UpdateLesson(int id, UpdateLessonDto updateDto);
 
-        Task DeleteLesson(Guid id);
+        Task DeleteLesson(int id);
 
     }
 }

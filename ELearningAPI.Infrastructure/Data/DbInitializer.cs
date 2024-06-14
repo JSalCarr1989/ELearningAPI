@@ -21,7 +21,7 @@ namespace ELearningAPI.Infrastructure.Data
             var users = new User[]
             {
                 new User { 
-                    Id = Guid.NewGuid(), 
+                    Id = 1, 
                     Email = "homer@fakemail.com", 
                     FirstName="Homer",
                     LastName = "Simpson", 
@@ -29,7 +29,7 @@ namespace ELearningAPI.Infrastructure.Data
                     Type = UserRole.Professor 
                 },
                new User {
-                    Id = Guid.NewGuid(),
+                    Id = 2,
                     Email = "bart@fakemail.com",
                     FirstName="Bart",
                     LastName = "Simpson",

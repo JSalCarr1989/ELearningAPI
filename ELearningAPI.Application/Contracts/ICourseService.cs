@@ -5,14 +5,18 @@ namespace ELearningAPI.Application.Contracts
 {
     public  interface ICourseService
     {
-        Task<Guid> CreateCourse(CreateCourseDto course);
-        Task<CourseViewModel> GetCourseById(Guid id);
+        Task<int> CreateCourse(CreateCourseDto course);
+        Task<CourseViewModel> GetCourseById(int id);
 
         List<CourseViewModel> GetCourseList();
 
-        Task UpdateCourse(Guid id, UpdateCourseDto updateDto);
+        Task UpdateCourse(int id, UpdateCourseDto updateDto);
 
-        Task DeleteCourse(Guid id);
+        Task DeleteCourse(int id);
+
+        List<CourseViewModel> GetAvailableCourses();
+
+
 
 
     }

@@ -5,9 +5,9 @@ namespace ELearningAPI.Application.Contracts
 {
     public interface IAnswerService
     {
-        Guid CreateAnswer(CreateStudentAnswerDto answerDTO);
+        List<int> CreateAnswers(List<CreateStudentAnswerDto> answerDTOs);
 
-        Task<StudentAnswerViewModel> GetAnswerById(Guid id);
+        Task<StudentAnswerViewModel> GetAnswerById(int id);
 
     }
 }

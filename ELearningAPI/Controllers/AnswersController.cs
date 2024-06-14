@@ -1,5 +1,4 @@
 ﻿using ELearningAPI.Application.Contracts;
-using ELearningAPI.Application.Services;
 using ELearningAPI.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +19,7 @@ namespace ELearningAPI.Presentation.Controllers
 
         [HttpGet("{id}")]
         [Authorize(Policy = "RequiredStudentRole")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById(int id)
         {
             var course = await answerService.GetAnswerById(id);
 
@@ -29,11 +28,11 @@ namespace ELearningAPI.Presentation.Controllers
 
         [HttpPost]
         [Authorize(Policy = "RequiredStudentRole")]
-        public  ActionResult PostQuestion(CreateStudentAnswerDto answerDto)
+        public  ActionResult PostQuestion([FromBody] List<CreateStudentAnswerDto> answerDtos)
         {
-            var answerId = answerService.CreateAnswer(answerDto);
+            var answers = answerService.CreateAnswers(answerDtos);
 
-            return CreatedAtAction(nameof(GetById), new { id = answerId }, answerDto);
+            return Ok(answers);
         }
     }
 }

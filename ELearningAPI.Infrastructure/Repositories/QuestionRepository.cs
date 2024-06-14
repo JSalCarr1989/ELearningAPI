@@ -13,7 +13,7 @@ namespace ELearningAPI.Infrastructure.Repositories
             this.context = context;
         }
 
-        public async  Task<Question> GetQuestionById(Guid id)
+        public async  Task<Question> GetQuestionById(int id)
         {
             var question = await context.Questions
                .Include(l => l.Options)

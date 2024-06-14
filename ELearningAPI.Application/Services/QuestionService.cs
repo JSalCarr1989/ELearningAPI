@@ -16,14 +16,13 @@ namespace ELearningAPI.Application.Services
             this.userContextService = userContextService;
         }
 
-        public Guid CreateQuestion(CreateQuestionDto questionDto)
+        public int CreateQuestion(CreateQuestionDto questionDto)
         {
 
             var userId = userContextService.GetUserId();
 
             var question = new Question
             {
-                Id = Guid.NewGuid(),
                 Description = questionDto.Description,
                 Type = questionDto.Type,
                 CreatedBy = userId,
@@ -31,7 +30,6 @@ namespace ELearningAPI.Application.Services
                 LessonId = questionDto.LessonId,
                 Options = questionDto.Options.Select(o => new QuestionOption
                 {
-                    Id = Guid.NewGuid(),
                     Option = o.Option,
                     IsCorrect = o.IsCorrect
                 }).ToList()
@@ -46,7 +44,7 @@ namespace ELearningAPI.Application.Services
 
         }
 
-        public async Task DeleteQuestion(Guid id)
+        public async Task DeleteQuestion(int id)
         {
             var question = await questionRepository.GetById(id);
 
@@ -58,7 +56,7 @@ namespace ELearningAPI.Application.Services
             questionRepository.Delete(question.Id);
         }
 
-        public async Task<QuestionViewModel> GetQuestionById(Guid id)
+        public async Task<QuestionViewModel> GetQuestionById(int id)
         {
 
             var question = await questionRepository.GetQuestionById(id);
@@ -87,7 +85,7 @@ namespace ELearningAPI.Application.Services
             return questionViewModels;
         }
 
-        public async Task UpdateQuestion(Guid id, UpdateQuestionDto updateDto)
+        public async Task UpdateQuestion(int id, UpdateQuestionDto updateDto)
         {
             var question = await questionRepository.GetById(id);
 

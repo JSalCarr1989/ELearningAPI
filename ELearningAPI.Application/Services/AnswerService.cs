@@ -17,24 +17,33 @@ namespace ELearningAPI.Application.Services
             this.answerRepository = answerRepository;
         }
 
-        public Guid CreateAnswer(CreateStudentAnswerDto answerDTO)
+        public List<int> CreateAnswers(List<CreateStudentAnswerDto> answerDTOs)
         {
+            List<int> createdAnswers = new List<int>();
+
             var userId = userContextService.GetUserId();
 
-            StudentAnswer studentAnswer = new StudentAnswer()
+            foreach (var answer in answerDTOs)
             {
-                UserId = userId,
-                QuestionId = answerDTO.QuestionId,
-                SelectedOptions = JsonSerializer.Serialize(answerDTO.SelectedOptions)
-            };
 
-            var newAnswer = answerRepository.Add(studentAnswer);
+                StudentAnswer studentAnswer = new StudentAnswer()
+                {
+                    UserId = userId,
+                    QuestionId = answer.QuestionId,
+                    SelectedOptions = JsonSerializer.Serialize(answer.SelectedOptions)
+                };
 
-            return newAnswer;
+                var newAnswer = answerRepository.Add(studentAnswer);
+
+                createdAnswers.Add(newAnswer);
+
+            }
+
+            return createdAnswers;
 
         }
 
-        public async Task<StudentAnswerViewModel> GetAnswerById(Guid id)
+        public async Task<StudentAnswerViewModel> GetAnswerById(int id)
         {
 
             var answerFromDb = await answerRepository.GetStudentAnswerById(id);
@@ -52,7 +61,7 @@ namespace ELearningAPI.Application.Services
             {
                 Id = answer.Id,
                 QuestionId= answer.QuestionId,
-                SelectedOptions = JsonSerializer.Deserialize<List<Guid>>(answer.SelectedOptions)
+                SelectedOptions = JsonSerializer.Deserialize<List<int>>(answer.SelectedOptions)
             };
         }
     }

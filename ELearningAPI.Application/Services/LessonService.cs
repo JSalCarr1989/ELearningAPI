@@ -14,12 +14,11 @@ namespace ELearningAPI.Application.Services
         {
             this.lessonRepository = lessonRepository;
         }
-        public async Task<Guid> CreateLesson(CreateLessonDto lessonDto)
+        public async Task<int> CreateLesson(CreateLessonDto lessonDto)
         {
 
             var newLesson = new Lesson
             {
-                Id = Guid.NewGuid(),
                 Title = lessonDto.Title,
                 Description = lessonDto.Description,
                 Source = lessonDto.Source,
@@ -49,7 +48,7 @@ namespace ELearningAPI.Application.Services
 
         }
 
-        public async Task DeleteLesson(Guid id)
+        public async Task DeleteLesson(int id)
         {
             var course = await lessonRepository.GetById(id);
 
@@ -61,7 +60,7 @@ namespace ELearningAPI.Application.Services
             lessonRepository.Delete(course.Id);
         }
 
-        public async Task<LessonViewModel> GetLessonById(Guid id)
+        public async Task<LessonViewModel> GetLessonById(int id)
         {
 
             var lessonFromDb = await lessonRepository.GetLessonById(id);
@@ -87,7 +86,7 @@ namespace ELearningAPI.Application.Services
             return lessonViewModels;
         }
 
-        public async Task UpdateLesson(Guid id, UpdateLessonDto updateDto)
+        public async Task UpdateLesson(int id, UpdateLessonDto updateDto)
         {
             var lesson = await lessonRepository.GetById(id);
 

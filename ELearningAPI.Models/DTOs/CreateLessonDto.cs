@@ -10,7 +10,7 @@
 
         public int ApprovalThreshold { get; set; }
 
-        public Guid CourseId { get; set; }
+        public int CourseId { get; set; }
 
     }
 }

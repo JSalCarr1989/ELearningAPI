@@ -2,7 +2,7 @@
 {
     public class CreateStudentAnswerDto
     {
-        public Guid QuestionId { get; set; }
-        public List<Guid> SelectedOptions { get; set; }
+        public int QuestionId { get; set; }
+        public List<int> SelectedOptions { get; set; }
     }
 }

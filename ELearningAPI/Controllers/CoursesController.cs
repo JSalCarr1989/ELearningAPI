@@ -17,17 +17,26 @@ namespace ELearningAPI.Presentation.Controllers
         }
 
         [HttpGet]
-        public  IActionResult Get()
+        public IActionResult Get()
         {
             var courses = courseService.GetCourseList();
 
             return Ok(courses);
         }
 
+        [HttpGet("Available")]
+        public IActionResult GetAvailableCourses()
+        {
+            var courses = courseService.GetAvailableCourses();
+
+            return Ok(courses);
+
+        }
+
 
         [HttpGet("{id}")]
         [Authorize(Policy = "RequireProfessorRole")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById(int id)
         {
             var course = await courseService.GetCourseById(id);
 
@@ -48,7 +57,7 @@ namespace ELearningAPI.Presentation.Controllers
 
         [HttpPut]
         [Authorize(Policy = "RequireProfessorRole")]
-        public async Task<IActionResult> UpdateCourse(Guid id, [FromBody] UpdateCourseDto updateCourse)
+        public async Task<IActionResult> UpdateCourse(int id, [FromBody] UpdateCourseDto updateCourse)
         {
             await courseService.UpdateCourse(id,updateCourse);
 
@@ -58,7 +67,7 @@ namespace ELearningAPI.Presentation.Controllers
 
         [HttpDelete]
         [Authorize(Policy = "RequireProfessorRole")]
-        public async Task<IActionResult> DeleteCourse(Guid id)
+        public async Task<IActionResult> DeleteCourse(int id)
         {
             await courseService.DeleteCourse(id);
 

@@ -11,12 +11,12 @@ namespace ELearningAPI.Application.Services
             this.httpContextAccessor = httpContextAccessor;
         }
 
-        public Guid GetUserId()
+        public int GetUserId()
         {
             var userIdClaim = httpContextAccessor.HttpContext?.User?.FindFirst("UserId");
-            return userIdClaim != null && Guid.TryParse(userIdClaim.Value, out var userId)
+            return userIdClaim != null && int.TryParse(userIdClaim.Value, out var userId)
                 ? userId
-                : Guid.Empty;
+                : 0;
         }
     }
 }

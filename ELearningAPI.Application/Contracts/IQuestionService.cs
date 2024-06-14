@@ -5,15 +5,15 @@ namespace ELearningAPI.Application.Contracts
 {
     public interface IQuestionService
     {
-        Guid CreateQuestion(CreateQuestionDto questionDto);
+        int CreateQuestion(CreateQuestionDto questionDto);
 
-        Task<QuestionViewModel> GetQuestionById(Guid id);
+        Task<QuestionViewModel> GetQuestionById(int id);
 
         List<QuestionViewModel> GetQuestionList();
 
-        Task UpdateQuestion(Guid id, UpdateQuestionDto updateDto);
+        Task UpdateQuestion(int id, UpdateQuestionDto updateDto);
 
-        Task DeleteQuestion(Guid id);
+        Task DeleteQuestion(int id);
 
 
     }

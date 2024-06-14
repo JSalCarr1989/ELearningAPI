@@ -2,9 +2,9 @@
 {
     public class CorrelatedLesson
     {
-        public Guid LessonId { get; set; }
+        public int LessonId { get; set; }
 
-        public Guid CorrelatedLessonId { get; set; }
+        public int CorrelatedLessonId { get; set; }
 
         public Lesson Lesson { get; set; }
         public Lesson RelatedLesson { get; set; }
