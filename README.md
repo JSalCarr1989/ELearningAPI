@@ -58,3 +58,4 @@
    - add a testing project with xUnit test framework , add related unit tests and integration tests
    - add personalized types of exceptions for every validation needed
    - add a global middleware to manage every error globally and check for every type of exception
+   - add an Enroll endpoint on Courses
