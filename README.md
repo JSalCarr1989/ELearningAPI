@@ -24,6 +24,22 @@
 ## How to use this project 
    - download visual studio code 2022 and open up this project with it
    - use postman or another client to work with services
+   - I have added a exec.zip folder on this repository you can download it on your machine and open it
+   - you need to get net 8 runtime first
+      - https://download.visualstudio.microsoft.com/download/pr/751d3fcd-72db-4da2-b8d0-709c19442225/33cc492bde704bfd6d70a2b9109005a0/dotnet-hosting-8.0.6-win.exe
+   
+   - when the runtime is installed you need to run dotnet --version to verify 
+   ![image](https://github.com/JSalCarr1989/ELearningAPI/assets/33041463/87df38c5-7c32-4699-a4d4-5cc09c426a54)
+
+   - after that you need to open cmd on the exec folder and execute this command dotnet ELearningAPI.Presentation.dll --urls https://localhost:7001
+   
+   - the api should be running like this
+   ![image](https://github.com/JSalCarr1989/ELearningAPI/assets/33041463/3ed5b031-62f0-4eee-bfc9-01670cff5a2d)
+
+   - finally use postman to test the API
+   ![image](https://github.com/JSalCarr1989/ELearningAPI/assets/33041463/456b1a8c-ced6-4404-94d3-e5aa224ca7c0)
+
+
 ## Testing API
    - First of all you need to get a token in the https://localhost:7001/api/Auth/login endpoint for this here are the dummy users
         - User: homer@fakemail.com , Password: homerpass , Type: Professor
